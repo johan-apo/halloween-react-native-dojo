@@ -9,9 +9,10 @@ export const PumpkinsAndBatsSVG = (props: SvgProps) => {
   return (
     <View style={{ width: "100%", aspectRatio }}>
       <Svg
-        width={375}
-        height={396}
+        width="100%"
+        height="100%"
         fill="none"
+        viewBox={`0 0 ${originalWidth} ${originalHeight}`}
         // @ts-ignore
         xmlns="http://www.w3.org/2000/svg"
         {...props}
