@@ -1,7 +1,7 @@
 import { View } from "react-native";
 import Svg, { SvgProps, Path } from "react-native-svg";
 
-const PumpkinsAndBatsSVG = (props: SvgProps) => {
+export const PumpkinsAndBatsSVG = (props: SvgProps) => {
   const originalWidth = 375;
   const originalHeight = 396;
   const aspectRatio = originalWidth / originalHeight;
@@ -428,5 +428,3 @@ const PumpkinsAndBatsSVG = (props: SvgProps) => {
     </View>
   );
 };
-
-export default PumpkinsAndBatsSVG;

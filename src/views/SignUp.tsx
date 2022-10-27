@@ -1,11 +1,18 @@
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParamList } from "App";
+import {
+  CustomButton,
+  CustomText,
+  InputField,
+  SignupSigninContainer,
+} from "components";
 import { useForm, Controller } from "react-hook-form";
 import { Alert, Text, TextInput, View } from "react-native";
-import { CustomButton } from "../../components/CustomButton";
-import { SignupSigninContainer } from "../../components/SignupSigninContainer";
-import InputField from "../../components/SignupSigninContainer/InputField";
-import { Font } from "../../themes";
+import { DefaultConfigs } from "theme";
 
-const SignUp = ({ navigation }) => {
+type Props = NativeStackScreenProps<RootStackParamList, "SignUp">;
+
+const SignUp = ({ navigation }: Props) => {
   const {
     control,
     handleSubmit,
@@ -27,11 +34,21 @@ const SignUp = ({ navigation }) => {
   return (
     <SignupSigninContainer greeting="Welcome!">
       <InputField
-        inputProps={{ placeholder: "Username", control, name: "username" }}
+        inputProps={{
+          placeholder: "Username",
+          control,
+          name: "username",
+          isUsername: true,
+        }}
         errors={errors.username}
       />
       <InputField
-        inputProps={{ placeholder: "Email", control, name: "email" }}
+        inputProps={{
+          placeholder: "Email",
+          control,
+          name: "email",
+          isEmail: true,
+        }}
         errors={errors.email}
       />
       <InputField
@@ -39,6 +56,7 @@ const SignUp = ({ navigation }) => {
           placeholder: "Password",
           control,
           name: "password",
+          isPassword: true,
           secureTextEntry: true,
         }}
         errors={errors.password}
@@ -59,19 +77,23 @@ const SignUp = ({ navigation }) => {
             onChangeText={onChange}
             onBlur={onBlur}
             placeholder="Confirm password"
-            placeholderTextColor="#fff"
+            placeholderTextColor={DefaultConfigs.colors.white}
             style={{
-              backgroundColor: "#E6BF8D",
+              backgroundColor: DefaultConfigs.colors.brandy,
               padding: 10,
               borderRadius: 12,
-              color: "#fff",
+              color: DefaultConfigs.colors.white,
               paddingHorizontal: 20,
             }}
             secureTextEntry
           />
         )}
       />
-      {errors.confirmPassword && <Text>{errors.confirmPassword.message}</Text>}
+      {errors.confirmPassword && (
+        <CustomText variant="small" color="brownishRed">
+          {errors.confirmPassword.message!}
+        </CustomText>
+      )}
 
       <View style={{ marginTop: 18, marginBottom: 8 }}>
         <CustomButton
@@ -82,13 +104,19 @@ const SignUp = ({ navigation }) => {
           Sign Up
         </CustomButton>
       </View>
-      <Text style={{ color: "#767676", fontSize: 14, textAlign: "center" }}>
+      <Text
+        style={{
+          color: DefaultConfigs.colors.darkerGray,
+          fontSize: 14,
+          textAlign: "center",
+        }}
+      >
         Already have an account?{" "}
         <Text
           style={{
             textDecorationLine: "underline",
-            color: "#fff",
-            fontFamily: Font.InterBold,
+            color: DefaultConfigs.colors.white,
+            fontFamily: DefaultConfigs.fontWeight[700],
           }}
           onPress={() => navigation.navigate("SignIn")}
         >

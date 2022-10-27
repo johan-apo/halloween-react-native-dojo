@@ -1,1 +1,1 @@
-export { default as StepViewContainer } from "./StepViewContainer";
+export { StepViewContainer } from "./StepViewContainer";

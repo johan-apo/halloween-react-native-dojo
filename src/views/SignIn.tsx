@@ -1,13 +1,20 @@
-import CheckBox from "@react-native-community/checkbox";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParamList } from "App";
+import {
+  CustomButton,
+  InputField,
+  RedirectText,
+  SignupSigninContainer,
+} from "components";
+import Checkbox from "expo-checkbox";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Alert, Text, View } from "react-native";
-import { CustomButton } from "../../components/CustomButton";
-import { SignupSigninContainer } from "../../components/SignupSigninContainer";
-import InputField from "../../components/SignupSigninContainer/InputField";
-import { Font } from "../../themes";
+import { DefaultConfigs } from "theme";
 
-const SignIn = ({ navigation }) => {
+type Props = NativeStackScreenProps<RootStackParamList, "SignIn">;
+
+const SignIn = ({ navigation }: Props) => {
   const {
     control,
     handleSubmit,
@@ -40,11 +47,28 @@ const SignIn = ({ navigation }) => {
         }}
         errors={errors.password}
       />
-      {/* <CheckBox
-        disabled={false}
-        value={toggleCheckBox}
-        onValueChange={(newValue) => setToggleCheckBox(newValue)}
-      /> */}
+      <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <Checkbox
+          color={DefaultConfigs.colors.dirtBrown}
+          style={{
+            marginRight: 8,
+            height: 16,
+            width: 16,
+            borderRadius: 4,
+          }}
+          disabled={false}
+          value={toggleCheckBox}
+          onValueChange={(newValue) => setToggleCheckBox(newValue)}
+        />
+        <Text
+          style={{
+            fontSize: DefaultConfigs.fontSizes.xs,
+            color: DefaultConfigs.colors.darkerGray,
+          }}
+        >
+          Remember me
+        </Text>
+      </View>
 
       <View style={{ marginTop: 18, marginBottom: 8 }}>
         <CustomButton
@@ -55,19 +79,11 @@ const SignIn = ({ navigation }) => {
           Sign In
         </CustomButton>
       </View>
-      <Text style={{ color: "#767676", fontSize: 14, textAlign: "center" }}>
-        Don't have an account?{" "}
-        <Text
-          style={{
-            textDecorationLine: "underline",
-            color: "#fff",
-            fontFamily: Font.InterBold,
-          }}
-          onPress={() => navigation.navigate("SignUp")}
-        >
-          Sign up
-        </Text>
-      </Text>
+      <RedirectText
+        mainText="Don't have an account?"
+        redirectPathName="Sign up"
+        onNavigate={() => navigation.navigate("SignUp")}
+      />
     </SignupSigninContainer>
   );
 };

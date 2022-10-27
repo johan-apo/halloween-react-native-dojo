@@ -1,7 +1,7 @@
 import { View } from "react-native";
 import Svg, { SvgProps, Path } from "react-native-svg";
 
-const GhostsSVG = (props: SvgProps) => {
+export const GhostsSVG = (props: SvgProps) => {
   const originalWidth = 375;
   const originalHeight = 443;
   const aspectRatio = originalWidth / originalHeight;
@@ -46,5 +46,3 @@ const GhostsSVG = (props: SvgProps) => {
     </View>
   );
 };
-
-export default GhostsSVG;

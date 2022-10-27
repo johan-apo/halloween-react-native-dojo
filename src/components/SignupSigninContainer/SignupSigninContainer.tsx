@@ -1,9 +1,9 @@
+import { PumpkinsAndBatsSVG } from "components/SVGComponents";
 import { ScrollView, View } from "react-native";
-import { Colors } from "../../themes";
-import PumpkinsAndBatsSVG from "../SVGComponents/PumpkinsAndBats";
+import { DefaultConfigs } from "theme";
 import { CustomText } from "../Text";
 
-const SignupSigninContainer = ({
+export const SignupSigninContainer = ({
   greeting,
   subgreeting,
   children,
@@ -13,14 +13,14 @@ const SignupSigninContainer = ({
   children: React.ReactNode;
 }) => {
   return (
-    <ScrollView style={{ backgroundColor: "#F9B154" }}>
+    <ScrollView style={{ backgroundColor: DefaultConfigs.colors.orange }}>
       <PumpkinsAndBatsSVG />
       <View style={{ paddingHorizontal: 16, position: "relative", top: -16 }}>
-        <CustomText variant="h1" color={Colors.White}>
+        <CustomText variant="h1" color="white">
           {greeting}
         </CustomText>
         {subgreeting && (
-          <CustomText variant="lg" color={Colors.DirtBrown}>
+          <CustomText variant="lg" color="dirtBrown">
             {subgreeting}
           </CustomText>
         )}
@@ -29,5 +29,3 @@ const SignupSigninContainer = ({
     </ScrollView>
   );
 };
-
-export default SignupSigninContainer;

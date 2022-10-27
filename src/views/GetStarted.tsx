@@ -1,14 +1,20 @@
-import { CustomButton } from "../../components/CustomButton";
-import { StepViewContainer } from "../../components/StepViewContainer";
-import ZombiesBatsAndMoon from "../../components/SVGComponents/ZombiesBatsAndMoon";
-import { CustomText } from "../../components/Text";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParamList } from "App";
+import {
+  CustomButton,
+  CustomText,
+  StepViewContainer,
+  ZombiesBatsAndMoon,
+} from "components";
 
-const GetStarted = ({ navigation }) => {
+type Props = NativeStackScreenProps<RootStackParamList, "GetStarted">;
+
+const GetStarted = ({ navigation }: Props) => {
   return (
     <StepViewContainer svgComponent={<ZombiesBatsAndMoon />}>
       <CustomText>
         It is a long established fact that a reader will be distracted by the
-        readable conent of a page when looking at its layout
+        readable content of a page when looking at its layout
       </CustomText>
       <CustomButton
         variant="filled"

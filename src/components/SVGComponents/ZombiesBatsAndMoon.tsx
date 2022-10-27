@@ -1,7 +1,7 @@
 import { View } from "react-native";
 import Svg, { SvgProps, G, Path, Defs, ClipPath } from "react-native-svg";
 
-const ZombiesBatsAndMoon = (props: SvgProps) => {
+export const ZombiesBatsAndMoon = (props: SvgProps) => {
   const originalWidth = 375;
   const originalHeight = 559;
   const aspectRatio = originalWidth / originalHeight;
@@ -89,5 +89,3 @@ const ZombiesBatsAndMoon = (props: SvgProps) => {
     </View>
   );
 };
-
-export default ZombiesBatsAndMoon;

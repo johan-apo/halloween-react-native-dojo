@@ -1,5 +1,5 @@
 import { Text, StyleSheet } from "react-native";
-import { Colors, Font } from "../themes";
+import { DefaultConfigs, Font, Colors } from "theme";
 
 const baseTextStyles = {
   marginBottom: 14,
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
 
 type Variants = keyof typeof styles;
 
-type TypographyProps = {
+type CustomTextProps = {
   children: string;
   variant?: Variants;
   color?: Colors;
@@ -47,14 +47,14 @@ type TypographyProps = {
 export const CustomText = ({
   children,
   variant = "paragraph",
-  color = Colors.Grey,
-}: TypographyProps) => {
+  color = "gray",
+}: CustomTextProps) => {
   return (
     <Text
       style={[
         styles[variant],
         {
-          color,
+          color: DefaultConfigs.colors[color],
         },
       ]}
     >

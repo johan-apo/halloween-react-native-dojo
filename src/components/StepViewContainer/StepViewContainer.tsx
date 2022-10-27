@@ -1,24 +1,19 @@
 import { ScrollView, View } from "react-native";
 
-const StepViewContainer = ({
-  svgComponent: SVGComponent,
+export const StepViewContainer = ({
+  svgComponent,
   children,
 }: {
   svgComponent: React.ReactNode;
   children: React.ReactNode;
 }) => {
   return (
-    <ScrollView>
-      <View
-        style={{
-          flex: 1,
-          alignItems: "center",
-        }}
-      >
-        {SVGComponent}
-        {children}
-      </View>
+    <ScrollView
+      style={{ flex: 1 }}
+      contentContainerStyle={{ alignItems: "center" }}
+    >
+      <View style={{ marginBottom: 16 }}>{svgComponent}</View>
+      {children}
     </ScrollView>
   );
 };
-export default StepViewContainer;

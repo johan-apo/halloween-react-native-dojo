@@ -1,28 +1,28 @@
-import { Pressable, StyleSheet, Text, TouchableOpacity } from "react-native";
-import { Font } from "../themes";
+import { Pressable, StyleSheet, Text } from "react-native";
+import { DefaultConfigs, Font } from "../theme";
 
 const borderRadius = 22;
 
 const baseTouchableStyles = {
   paddingTop: 13,
   paddingBottom: 14,
-  paddingHorizontal: 80,
+  paddingHorizontal: 90,
 };
 
 const touchableStyles = StyleSheet.create({
   filled: {
     ...baseTouchableStyles,
-    backgroundColor: "#FFB41F",
+    backgroundColor: DefaultConfigs.colors.orange,
     borderRadius,
   },
   dark: {
     ...baseTouchableStyles,
-    backgroundColor: "#88612F",
+    backgroundColor: DefaultConfigs.colors.dirtBrown,
     borderRadius: 12,
   },
   outline: {
     ...baseTouchableStyles,
-    borderColor: "orange",
+    borderColor: DefaultConfigs.colors.orange,
     borderWidth: 2,
     padding: 10,
     borderRadius,
@@ -39,23 +39,23 @@ const baseTextStyles = {
 const textStyles = StyleSheet.create({
   filled: {
     ...baseTextStyles,
-    color: "#fff",
+    color: DefaultConfigs.colors.white,
     fontFamily: Font.InterBold,
   },
   dark: {
     ...baseTextStyles,
-    color: "#fff",
+    color: DefaultConfigs.colors.white,
     fontFamily: Font.InterBold,
     textAlign: "center",
   },
   outline: {
     ...baseTextStyles,
-    color: "#FFB41F",
+    color: DefaultConfigs.colors.orange,
     fontFamily: Font.InterSemiBold,
   },
   subtle: {
     ...baseTextStyles,
-    color: "#999",
+    color: DefaultConfigs.colors.lighterGray,
     fontFamily: Font.InterMedium,
   },
 });

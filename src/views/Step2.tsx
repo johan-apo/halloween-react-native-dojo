@@ -1,9 +1,15 @@
-import { CustomButton } from "../../components/CustomButton";
-import { StepViewContainer } from "../../components/StepViewContainer";
-import SkullsAndBatsSVG from "../../components/SVGComponents/SkullsAndBats";
-import { CustomText } from "../../components/Text";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParamList } from "App";
+import {
+  CustomButton,
+  CustomText,
+  SkullsAndBatsSVG,
+  StepViewContainer,
+} from "components";
 
-const Step2 = ({ navigation }) => {
+type Props = NativeStackScreenProps<RootStackParamList, "Step2">;
+
+const Step2 = ({ navigation }: Props) => {
   return (
     <StepViewContainer svgComponent={<SkullsAndBatsSVG />}>
       <CustomText variant="h2">Main Title</CustomText>

@@ -1,10 +1,11 @@
 {
   "expo": {
+    "entryPoint": "./src/App.tsx",
     "name": "tp-COPE-tpam-dojo-pod-halloween-22",
     "slug": "tp-COPE-tpam-dojo-pod-halloween-22",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/Group.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -20,7 +21,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/Group.png",
         "backgroundColor": "#FFFFFF"
       }
     },
