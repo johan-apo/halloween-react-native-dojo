@@ -1,38 +1,39 @@
 import { Text, StyleSheet } from "react-native";
-import { DefaultConfigs, Font, Colors, SpacingProps } from "theme";
+import { DefaultTheme, Font, Colors } from "theme";
 
 const baseTextStyles = {
-  marginBottom: 14,
+  marginBottom: DefaultTheme.spacing.md,
 };
 
 const styles = StyleSheet.create({
   h1: {
-    fontFamily: Font.InterExtraBold,
-    fontSize: 30,
-    ...baseTextStyles,
+    fontFamily: DefaultTheme.fontWeight["800"],
+    fontSize: DefaultTheme.fontSizes.xl,
+    marginBottom: 4,
   },
   h2: {
-    fontFamily: Font.InterSemiBold,
-    fontSize: 30,
+    fontFamily: DefaultTheme.fontWeight["600"],
+    fontSize: DefaultTheme.fontSizes.xl,
     ...baseTextStyles,
   },
   lg: {
-    fontSize: 18,
-    fontFamily: Font.InterRegular,
+    fontSize: DefaultTheme.fontSizes.md,
+    fontFamily: DefaultTheme.fontWeight["400"],
     ...baseTextStyles,
   },
   paragraph: {
-    fontSize: 16,
-    fontFamily: Font.InterRegular,
+    fontSize: DefaultTheme.fontSizes.sm,
+    fontFamily: DefaultTheme.fontWeight["400"],
     textAlign: "center",
     width: "75%",
-    lineHeight: 24,
+    lineHeight: DefaultTheme.spacing.xl,
     ...baseTextStyles,
   },
   small: {
-    fontSize: 14,
+    fontFamily: DefaultTheme.fontWeight["400"],
+    fontSize: DefaultTheme.fontSizes.xs,
     paddingTop: 4,
-    paddingLeft: 20,
+    paddingLeft: DefaultTheme.spacing.lg,
   },
 });
 
@@ -54,7 +55,7 @@ export const CustomText = ({
       style={[
         styles[variant],
         {
-          color: DefaultConfigs.colors[color],
+          color: DefaultTheme.colors[color],
         },
       ]}
     >

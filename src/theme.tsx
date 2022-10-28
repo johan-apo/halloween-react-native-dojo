@@ -42,11 +42,11 @@ enum EnumColors {
   PumpkinBackground = "#F9B154",
 }
 
-export type FontWeight = keyof typeof DefaultConfigs.fontWeight;
-export type Colors = keyof typeof DefaultConfigs.colors;
-export type Spacing = keyof typeof DefaultConfigs.spacing;
+export type FontWeight = keyof typeof DefaultTheme.fontWeight;
+export type Colors = keyof typeof DefaultTheme.colors;
+export type Spacing = keyof typeof DefaultTheme.spacing;
 
-export const DefaultConfigs = {
+export const DefaultTheme = {
   spacing: {
     xs: 10,
     sm: 12,

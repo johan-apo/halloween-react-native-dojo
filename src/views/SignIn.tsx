@@ -10,7 +10,7 @@ import Checkbox from "expo-checkbox";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Alert, Text, View } from "react-native";
-import { DefaultConfigs } from "theme";
+import { DefaultTheme } from "theme";
 import { prettyStringifyAlert } from "utils";
 
 type Props = NativeStackScreenProps<RootStackParamList, "SignIn">;
@@ -33,7 +33,19 @@ const SignIn = ({ navigation }: Props) => {
     },
   });
 
-  const [toggleCheckBox, setToggleCheckBox] = useState(false);
+  const inputs = [
+    {
+      name: "emailOrUsername",
+      placeholder: "Email / username",
+      errors: errors.emailOrUsername,
+    },
+    {
+      name: "password",
+      placeholder: "Password",
+      errors: errors.password,
+      secureTextEntry: true,
+    },
+  ];
 
   const onSubmit = (data: FormInputs) =>
     Alert.alert("Form data", prettyStringifyAlert(data));
@@ -42,47 +54,25 @@ const SignIn = ({ navigation }: Props) => {
 
   return (
     <SignupSigninContainer greeting="Hi there!" subgreeting="Welcome back">
-      <InputField
-        inputProps={{
-          placeholder: "Email / username",
-          control,
-          name: "emailOrUsername",
-        }}
-        errors={errors.emailOrUsername}
-      />
-      <InputField
-        inputProps={{
-          placeholder: "Password",
-          control,
-          name: "password",
-          secureTextEntry: true,
-        }}
-        errors={errors.password}
-      />
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
-        <Checkbox
-          color={DefaultConfigs.colors.dirtBrown}
-          style={{
-            marginRight: 8,
-            height: 16,
-            width: 16,
-            borderRadius: 4,
+      {inputs.map((input) => (
+        <InputField
+          inputProps={{
+            ...input,
+            placeholder: input.placeholder,
+            control,
+            name: input.name,
           }}
-          disabled={false}
-          value={toggleCheckBox}
-          onValueChange={(newValue) => setToggleCheckBox(newValue)}
+          errors={input.errors}
+          key={input.name}
         />
-        <Text
-          style={{
-            fontSize: DefaultConfigs.fontSizes.xs,
-            color: DefaultConfigs.colors.darkerGray,
-          }}
-        >
-          Remember me
-        </Text>
-      </View>
-
-      <View style={{ marginTop: 18, marginBottom: 8 }}>
+      ))}
+      <RememberMeCheckbox />
+      <View
+        style={{
+          marginTop: DefaultTheme.spacing.md,
+          marginBottom: DefaultTheme.spacing.xs,
+        }}
+      >
         <CustomButton
           disabled={thereAreFormErrors}
           variant="dark"
@@ -97,6 +87,35 @@ const SignIn = ({ navigation }: Props) => {
         onNavigate={() => navigation.navigate("SignUp")}
       />
     </SignupSigninContainer>
+  );
+};
+
+const RememberMeCheckbox = () => {
+  const [toggleCheckBox, setToggleCheckBox] = useState(false);
+
+  return (
+    <View style={{ flexDirection: "row", alignItems: "center" }}>
+      <Checkbox
+        color={DefaultTheme.colors.dirtBrown}
+        style={{
+          marginRight: DefaultTheme.spacing.xs,
+          height: DefaultTheme.spacing.md,
+          width: DefaultTheme.spacing.md,
+          borderRadius: 4,
+        }}
+        disabled={false}
+        value={toggleCheckBox}
+        onValueChange={(newValue) => setToggleCheckBox(newValue)}
+      />
+      <Text
+        style={{
+          fontSize: DefaultTheme.fontSizes.xs,
+          color: DefaultTheme.colors.darkerGray,
+        }}
+      >
+        Remember me
+      </Text>
+    </View>
   );
 };
 

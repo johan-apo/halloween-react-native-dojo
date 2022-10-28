@@ -1,38 +1,29 @@
 import { TextInputProps, View } from "react-native";
+import { DefaultTheme } from "theme";
+import type { FormInputTypes } from "views/SignUp";
 import { CustomText } from "../Text";
 import { Input } from "./Input";
 
 type InputFieldProps = {
+  validationType?: FormInputTypes;
   inputProps: {
     placeholder: string;
     control: any;
     name: string;
-    isUsername?: boolean;
-    isEmail?: boolean;
-    isPassword?: boolean;
-    isConfirmPassword?: boolean;
+    validate?: any;
   } & TextInputProps;
   errors: any;
 };
 
 export const InputField = ({
-  inputProps: {
-    placeholder,
-    control,
-    name,
-    isUsername = false,
-    isEmail = false,
-    isPassword = false,
-    ...others
-  },
+  inputProps: { placeholder, control, name, ...others },
+  validationType: type,
   errors,
 }: InputFieldProps) => {
   return (
-    <View style={{ marginBottom: 14 }}>
+    <View style={{ marginBottom: DefaultTheme.spacing.md }}>
       <Input
-        isUsername={isUsername}
-        isEmail={isEmail}
-        isPassword={isPassword}
+        validationType={type}
         placeholder={placeholder}
         control={control}
         name={name}

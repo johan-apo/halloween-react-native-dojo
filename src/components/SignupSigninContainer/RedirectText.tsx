@@ -1,5 +1,5 @@
 import { Text } from "react-native";
-import { DefaultConfigs } from "../../theme";
+import { DefaultTheme } from "../../theme";
 
 type RedirectTextProps = {
   onNavigate: () => void;
@@ -15,8 +15,8 @@ export const RedirectText = ({
   return (
     <Text
       style={{
-        color: DefaultConfigs.colors.darkerGray,
-        fontSize: DefaultConfigs.fontSizes.xs,
+        color: DefaultTheme.colors.darkerGray,
+        fontSize: DefaultTheme.fontSizes.xs,
         textAlign: "center",
       }}
     >
@@ -24,8 +24,8 @@ export const RedirectText = ({
       <Text
         style={{
           textDecorationLine: "underline",
-          color: DefaultConfigs.colors.white,
-          fontFamily: DefaultConfigs.fontWeight[700],
+          color: DefaultTheme.colors.white,
+          fontFamily: DefaultTheme.fontWeight[700],
         }}
         onPress={onNavigate}
       >

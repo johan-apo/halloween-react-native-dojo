@@ -1,6 +1,6 @@
 import { PumpkinsAndBatsSVG } from "components/SVGComponents";
 import { ScrollView, View } from "react-native";
-import { DefaultConfigs } from "theme";
+import { DefaultTheme } from "theme";
 import { CustomText } from "../Text";
 
 type SignupSigninContainerProps = {
@@ -16,10 +16,16 @@ export const SignupSigninContainer = ({
 }: SignupSigninContainerProps) => {
   return (
     <ScrollView
-      style={{ backgroundColor: DefaultConfigs.colors.pumpkinBackground }}
+      style={{ backgroundColor: DefaultTheme.colors.pumpkinBackground }}
     >
       <PumpkinsAndBatsSVG />
-      <View style={{ paddingHorizontal: 16, position: "relative", top: -20 }}>
+      <View
+        style={{
+          paddingHorizontal: DefaultTheme.spacing.md,
+          position: "relative",
+          top: -DefaultTheme.spacing.lg,
+        }}
+      >
         <Greetings greeting={greeting} subgreeting={subgreeting} />
         {children}
       </View>

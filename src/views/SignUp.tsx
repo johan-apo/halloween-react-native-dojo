@@ -2,13 +2,13 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "App";
 import {
   CustomButton,
-  CustomText,
   InputField,
+  RedirectText,
   SignupSigninContainer,
 } from "components";
-import { useForm, Controller } from "react-hook-form";
-import { Alert, Text, TextInput, View } from "react-native";
-import { DefaultConfigs } from "theme";
+import { useForm } from "react-hook-form";
+import { Alert, Text, View } from "react-native";
+import { DefaultTheme } from "theme";
 import { prettyStringifyAlert } from "utils";
 
 type Props = NativeStackScreenProps<RootStackParamList, "SignUp">;
@@ -19,6 +19,8 @@ interface FormInputs {
   password: string;
   confirmPassword: string;
 }
+
+export type FormInputTypes = keyof FormInputs;
 
 const SignUp = ({ navigation }: Props) => {
   const {
@@ -36,6 +38,31 @@ const SignUp = ({ navigation }: Props) => {
     },
   });
 
+  const inputs = [
+    // no need of "name" as "validationType" and name are same
+    {
+      validationType: "username",
+      placeholder: "Username",
+      errors: errors.username,
+    },
+    { validationType: "email", placeholder: "Email", errors: errors.email },
+    {
+      validationType: "password",
+      placeholder: "Password",
+      errors: errors.password,
+      secureTextEntry: true,
+    },
+    {
+      validationType: "confirmPassword",
+      placeholder: "Confirm password",
+      errors: errors.confirmPassword,
+      secureTextEntry: true,
+      validate: (val: string) => {
+        if (watch("password") != val) return "Your passwords do not match";
+      },
+    },
+  ];
+
   const onSubmit = (data: FormInputs) =>
     Alert.alert("Form data", prettyStringifyAlert(data));
 
@@ -43,69 +70,25 @@ const SignUp = ({ navigation }: Props) => {
 
   return (
     <SignupSigninContainer greeting="Welcome!">
-      <InputField
-        inputProps={{
-          placeholder: "Username",
-          control,
-          name: "username",
-          isUsername: true,
+      {inputs.map((input) => (
+        <InputField
+          validationType={input.validationType as FormInputTypes}
+          inputProps={{
+            ...input,
+            placeholder: input.placeholder,
+            control,
+            name: input.validationType,
+          }}
+          errors={input.errors}
+          key={input.validationType}
+        />
+      ))}
+      <View
+        style={{
+          marginTop: DefaultTheme.spacing.md,
+          marginBottom: DefaultTheme.spacing.xs,
         }}
-        errors={errors.username}
-      />
-      <InputField
-        inputProps={{
-          placeholder: "Email",
-          control,
-          name: "email",
-          isEmail: true,
-        }}
-        errors={errors.email}
-      />
-      <InputField
-        inputProps={{
-          placeholder: "Password",
-          control,
-          name: "password",
-          isPassword: true,
-          secureTextEntry: true,
-        }}
-        errors={errors.password}
-      />
-
-      <Controller
-        control={control}
-        rules={{
-          required: true,
-          validate: (val: string) => {
-            if (watch("password") != val) return "Your passwords do not match";
-          },
-        }}
-        name={"confirmPassword"}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-            value={value}
-            onChangeText={onChange}
-            onBlur={onBlur}
-            placeholder="Confirm password"
-            placeholderTextColor={DefaultConfigs.colors.white}
-            style={{
-              backgroundColor: DefaultConfigs.colors.brandy,
-              padding: 10,
-              borderRadius: 12,
-              color: DefaultConfigs.colors.white,
-              paddingHorizontal: 20,
-            }}
-            secureTextEntry
-          />
-        )}
-      />
-      {errors.confirmPassword && (
-        <CustomText variant="small" color="brownishRed">
-          {errors.confirmPassword.message!}
-        </CustomText>
-      )}
-
-      <View style={{ marginTop: 18, marginBottom: 8 }}>
+      >
         <CustomButton
           disabled={thereAreFormErrors}
           variant="dark"
@@ -114,25 +97,11 @@ const SignUp = ({ navigation }: Props) => {
           Sign Up
         </CustomButton>
       </View>
-      <Text
-        style={{
-          color: DefaultConfigs.colors.darkerGray,
-          fontSize: 14,
-          textAlign: "center",
-        }}
-      >
-        Already have an account?{" "}
-        <Text
-          style={{
-            textDecorationLine: "underline",
-            color: DefaultConfigs.colors.white,
-            fontFamily: DefaultConfigs.fontWeight[700],
-          }}
-          onPress={() => navigation.navigate("SignIn")}
-        >
-          Sign in
-        </Text>
-      </Text>
+      <RedirectText
+        mainText="Already have an account?"
+        redirectPathName="Sign in"
+        onNavigate={() => navigation.navigate("SignIn")}
+      />
     </SignupSigninContainer>
   );
 };

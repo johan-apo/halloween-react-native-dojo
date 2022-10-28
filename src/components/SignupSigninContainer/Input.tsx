@@ -1,25 +1,26 @@
 import { StyleSheet, TextInput } from "react-native";
 import { Controller } from "react-hook-form";
 import type { Control } from "react-hook-form";
-import { DefaultConfigs } from "theme";
+import { DefaultTheme } from "theme";
+import { FormInputTypes } from "views/SignUp";
 
 const styles = StyleSheet.create({
   textInput: {
-    backgroundColor: DefaultConfigs.colors.brandy,
-    padding: 10,
-    borderRadius: 12,
-    color: DefaultConfigs.colors.white,
-    paddingHorizontal: 20,
+    fontFamily: DefaultTheme.fontWeight["400"],
+    backgroundColor: DefaultTheme.colors.brandy,
+    padding: DefaultTheme.spacing.xs,
+    borderRadius: DefaultTheme.spacing.sm,
+    color: DefaultTheme.colors.white,
+    paddingHorizontal: DefaultTheme.spacing.lg,
   },
 });
 
 type InputProps = {
+  validationType?: FormInputTypes;
   placeholder: string;
   control: Control;
   name: string;
-  isUsername: boolean;
-  isEmail: boolean;
-  isPassword: boolean;
+  validate?: any;
 };
 
 const EMAIL_REGEXP = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -31,17 +32,16 @@ export const Input = ({
   placeholder,
   control,
   name,
-  isUsername,
-  isEmail,
-  isPassword,
+  validationType: type,
+  validate,
   ...others
 }: InputProps) => {
-  return (
-    <Controller
-      control={control}
-      rules={{
-        required: "This field is required",
-        ...(isUsername && {
+  const validationBasedOnInputType = (
+    validationType: FormInputTypes | undefined
+  ) => {
+    switch (validationType) {
+      case "username":
+        return {
           minLength: {
             value: 3,
             message: "Must be at least 3 characters long",
@@ -51,20 +51,37 @@ export const Input = ({
             message:
               "Must be numeric or lowercase characters, dots and underscores",
           },
-        }),
-        ...(isEmail && {
+        };
+      case "email":
+        return {
           pattern: {
             value: EMAIL_REGEXP,
             message: "Invalid email address",
           },
-        }),
-        ...(isPassword && {
+        };
+      case "password":
+        return {
           pattern: {
             value: PASSWORD_REGEXP,
             message:
               "Must be at least 8 characters long, at least one uppercase letter, one lowercase letter, one number and one special character",
           },
-        }),
+        };
+      case "confirmPassword":
+        return {
+          validate,
+        };
+      default:
+        return {};
+    }
+  };
+
+  return (
+    <Controller
+      control={control}
+      rules={{
+        required: "This field is required",
+        ...validationBasedOnInputType(type),
       }}
       name={name}
       render={({ field: { onChange, onBlur, value } }) => (
@@ -73,7 +90,7 @@ export const Input = ({
           onChangeText={onChange}
           onBlur={onBlur}
           placeholder={placeholder}
-          placeholderTextColor={DefaultConfigs.colors.white}
+          placeholderTextColor={DefaultTheme.colors.white}
           style={styles.textInput}
           {...others}
         />
