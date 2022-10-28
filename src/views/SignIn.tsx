@@ -11,32 +11,44 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Alert, Text, View } from "react-native";
 import { DefaultConfigs } from "theme";
+import { prettyStringifyAlert } from "utils";
 
 type Props = NativeStackScreenProps<RootStackParamList, "SignIn">;
+
+interface FormInputs {
+  emailOrUsername: string;
+  password: string;
+}
 
 const SignIn = ({ navigation }: Props) => {
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<FormInputs>({
+    mode: "all",
     defaultValues: {
-      email: "",
+      emailOrUsername: "",
       password: "",
     },
   });
 
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
 
-  const onSubmit = (data) => Alert.alert("Your result", JSON.stringify(data));
+  const onSubmit = (data: FormInputs) =>
+    Alert.alert("Form data", prettyStringifyAlert(data));
 
   const thereAreFormErrors = !(Object.keys(errors).length === 0);
 
   return (
     <SignupSigninContainer greeting="Hi there!" subgreeting="Welcome back">
       <InputField
-        inputProps={{ placeholder: "Email", control, name: "email" }}
-        errors={errors.email}
+        inputProps={{
+          placeholder: "Email / username",
+          control,
+          name: "emailOrUsername",
+        }}
+        errors={errors.emailOrUsername}
       />
       <InputField
         inputProps={{

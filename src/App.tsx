@@ -8,6 +8,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Font } from "./theme";
 import { GetStarted, SignIn, SignUp, Step1, Step2 } from "views";
 import { registerRootComponent } from "expo";
+import { StatusBar } from "expo-status-bar";
 
 export type RootStackParamList = {
   Step1: undefined;
@@ -49,6 +50,7 @@ function App() {
 
   return (
     <SafeAreaProvider>
+      <StatusBar style="inverted" />
       <NavigationContainer onReady={onLayoutRootView}>
         <Stack.Navigator
           screenOptions={{

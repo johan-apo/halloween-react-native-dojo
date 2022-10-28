@@ -9,8 +9,16 @@ import {
 import { useForm, Controller } from "react-hook-form";
 import { Alert, Text, TextInput, View } from "react-native";
 import { DefaultConfigs } from "theme";
+import { prettyStringifyAlert } from "utils";
 
 type Props = NativeStackScreenProps<RootStackParamList, "SignUp">;
+
+interface FormInputs {
+  username: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
 
 const SignUp = ({ navigation }: Props) => {
   const {
@@ -18,7 +26,8 @@ const SignUp = ({ navigation }: Props) => {
     handleSubmit,
     formState: { errors },
     watch,
-  } = useForm({
+  } = useForm<FormInputs>({
+    mode: "all",
     defaultValues: {
       username: "",
       email: "",
@@ -27,7 +36,8 @@ const SignUp = ({ navigation }: Props) => {
     },
   });
 
-  const onSubmit = (data) => Alert.alert("Your result", JSON.stringify(data));
+  const onSubmit = (data: FormInputs) =>
+    Alert.alert("Form data", prettyStringifyAlert(data));
 
   const thereAreFormErrors = !(Object.keys(errors).length === 0);
 

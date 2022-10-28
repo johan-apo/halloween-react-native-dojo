@@ -2,24 +2,20 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "App";
 import {
   CustomButton,
-  CustomText,
   StepViewContainer,
+  TextContainer,
   ZombiesBatsAndMoon,
 } from "components";
 
 type Props = NativeStackScreenProps<RootStackParamList, "GetStarted">;
 
 const GetStarted = ({ navigation }: Props) => {
+  const handlePress = (screen: any) => () => navigation.navigate(screen);
+
   return (
     <StepViewContainer svgComponent={<ZombiesBatsAndMoon />}>
-      <CustomText>
-        It is a long established fact that a reader will be distracted by the
-        readable content of a page when looking at its layout
-      </CustomText>
-      <CustomButton
-        variant="filled"
-        onPress={() => navigation.navigate("SignUp")}
-      >
+      <TextContainer />
+      <CustomButton variant="filled" onPress={handlePress("SignUp")}>
         Get started
       </CustomButton>
     </StepViewContainer>

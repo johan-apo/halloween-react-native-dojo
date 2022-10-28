@@ -10,19 +10,15 @@ import {
 type Props = NativeStackScreenProps<RootStackParamList, "Step1">;
 
 const Step1 = ({ navigation }: Props) => {
+  const handlePress = (screen: any) => () => navigation.navigate(screen);
+
   return (
     <StepViewContainer svgComponent={<GhostsSVG />}>
-      <TextContainer />
-      <CustomButton
-        variant="outline"
-        onPress={() => navigation.navigate("Step2")}
-      >
+      <TextContainer title="Main title" />
+      <CustomButton variant="outline" onPress={handlePress("Step2")}>
         Next
       </CustomButton>
-      <CustomButton
-        variant="subtle"
-        onPress={() => navigation.navigate("SignUp")}
-      >
+      <CustomButton variant="subtle" onPress={handlePress("SignUp")}>
         Skip
       </CustomButton>
     </StepViewContainer>

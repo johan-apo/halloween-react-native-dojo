@@ -1,5 +1,5 @@
 import { Text, StyleSheet } from "react-native";
-import { DefaultConfigs, Font, Colors } from "theme";
+import { DefaultConfigs, Font, Colors, SpacingProps } from "theme";
 
 const baseTextStyles = {
   marginBottom: 14,

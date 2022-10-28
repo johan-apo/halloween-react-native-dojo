@@ -12,7 +12,7 @@ export const StepViewContainer = ({
   return (
     <ScrollView
       style={{ flex: 1 }}
-      contentContainerStyle={{ alignItems: "center" }}
+      contentContainerStyle={{ alignItems: "center", paddingBottom: 16 }}
     >
       <View style={{ marginBottom: 16 }}>{svgComponent}</View>
       {children}
