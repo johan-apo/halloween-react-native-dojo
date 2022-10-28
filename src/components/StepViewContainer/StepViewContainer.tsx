@@ -1,4 +1,5 @@
 import { ScrollView, View } from "react-native";
+import { DefaultTheme } from "theme";
 
 type StepViewContainerProps = {
   svgComponent: React.ReactNode;
@@ -12,9 +13,14 @@ export const StepViewContainer = ({
   return (
     <ScrollView
       style={{ flex: 1 }}
-      contentContainerStyle={{ alignItems: "center", paddingBottom: 16 }}
+      contentContainerStyle={{
+        alignItems: "center",
+        paddingBottom: DefaultTheme.spacing.md,
+      }}
     >
-      <View style={{ marginBottom: 16 }}>{svgComponent}</View>
+      <View style={{ marginBottom: DefaultTheme.spacing.md }}>
+        {svgComponent}
+      </View>
       {children}
     </ScrollView>
   );

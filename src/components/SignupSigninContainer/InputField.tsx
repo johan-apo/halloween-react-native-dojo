@@ -17,13 +17,13 @@ type InputFieldProps = {
 
 export const InputField = ({
   inputProps: { placeholder, control, name, ...others },
-  validationType: type,
+  validationType,
   errors,
 }: InputFieldProps) => {
   return (
     <View style={{ marginBottom: DefaultTheme.spacing.md }}>
       <Input
-        validationType={type}
+        validationType={validationType}
         placeholder={placeholder}
         control={control}
         name={name}
